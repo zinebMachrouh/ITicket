@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: ITicket-DB
+    image: gvenzl/oracle-free
+    restart: always
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      ORACLE_PASSWORD: "admin"
+      ORACLE_DATABASE: "ITicket"
+    volumes:
+      - db:/opt/oracle/oradata
+    networks:
+      - network-data
+
+networks:
+  network-data:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local
